@@ -17,9 +17,6 @@ Insights / problems and solutions
 ## identify which doctors has the most and least patients visit
   ## Problem if one doctor has significantly more visit than others , patient distribution is uneven
   ## which can lead to long wait time
-   ## solution adjust visit scheduling so that high workload doctors can  get support
-   ## introduce patients reassignment strategies for better balance
-
 select 
 d.doctor_id, d.name, count(visit_id) as total_visited
 from visits v
@@ -30,11 +27,7 @@ order by total_visited desc;
 
 2.## determine peak visit day
  ## determine the busiest day of visits
- ## so we can optimise scheduling and improve  efficiency
- ## doctors should be available on Sundays and and Saturdays
- ## where visits drops on Thursdays, visits can be re-scheldued 
- 
- Sql santax
+ ## so we can optimise scheduling and improve  efficiency 
  select 
  dayname(visit_date) as  Dates, count(*) as total_visit
   from visits
@@ -43,23 +36,17 @@ order by total_visited desc;
 
 3## find the revenue by departments
  ## problem- which department generate the most revenue
- ## solutions_highlights the department with the most revenue and allocate more budget to these  departments
- ## as they can generate more profit to the company
- ## improve more marketing for under performing departments.
-
- select
- d.department,d.name, round(sum(treatment_cost),2) as sum_billing
+   select
+ d.department, round(sum(treatment_cost),2) as sum_billing
   from visits v
   join doctors d
   on v.doctor_id = d.doctor_id
-  group by d.department,d.name
+  group by d.department
   order by  sum_billing desc
   limit 5;
 
 4## whats the age distribution of patients
   ## what age groups visits the hospitals more
- ## adults care  service is high in demand  and wellness program should be promoted to help the young adults
-
     select  
    case 
    when  age between 0 and 12 then '0-12 (chlidren)'
@@ -74,8 +61,6 @@ order by total_visited desc;
    order by  total_patients desc;
 
 5 ## find patients who have not visited the doctor in over a year
-  ##solutions set up  a reminder sms or email to inactive patients
-
    select  p.name, max(v.visit_date) as last_visit
    from visits v
    join patients p
@@ -90,10 +75,6 @@ order by total_visited desc;
    ##?? does more experience lead to more patients, the answer is yes, judging form our visualization
 
 7 ## which experience level is the most popular
- ## the seniors happens to be the most trusted ,the mid doctors made the most revenue showing the price is not equal to the work load
- ##hospital need to consider reducing the price in which the mids charge, new doctors needs more mentorships in order to gain more patients trust
- ## the seniors attracts the most patients judging by the total visit.
-
  select 
  case 
  when experience_years <5 then '0-4 years(new)'
@@ -113,3 +94,26 @@ order by total_visited desc;
  visualization on tableau
 
  [view my tableau dashboard](https://public.tableau.com/app/profile/emmanuel.ugiagbe/viz/Doctorsperformanceproject/Dashboard1)
+
+ RECOMENDATIONS
+
+Adjust visit scheduling so that high workload doctors can  get support and  introduce patients reassignment strategies for better work balance to reduce long wait time
+
+Doctors should be made readily  available on Sundays and and Saturdays as weekends appears to be the busiest days of visit.
+ where visits drops on Thursdays, visits can be re-scheldued to improve  visit efficiency
+
+General medicine appears to be the department  with the most revenue, allocation of more budget to this department should be considerd, the pediatric should also be a department the hospital look deep into as it appears to generate a substential ammount of revenue as they generate more profits also improve more marketing for under performing departments.
+
+The seniors happens to be the groups that visits the hospital most frequently therefore adult care  service is high in demand and should be paid good attention to, wellness program should be promoted to help the young adults keep fit and understand how to care for the body
+
+The gospital should endeavour to  set up  a reminder sms or email to inactive patients
+
+ The  seniors happens to be the most trusted ,the mid doctors made the most revenue showing the price is not equal to the workload
+ Hospital need to consider reducing the price in which the mids charge and crate more intership programs for the new doctors overseen by the seniors 
+Patients value Experience
+
+
+
+
+
+
