@@ -93,7 +93,7 @@ order by total_visited desc;
 
  visualization on tableau
 
- [view my tableau dashboard](https://public.tableau.com/app/profile/emmanuel.ugiagbe/viz/Doctorsperformanceproject/Dashboard1)
+ [view my tableau dashboard](https://public.tableau.com/app/profile/emmanuel.ugiagbe/viz/Doctorsperformanceproject101/Dashboard1)
 
  RECOMENDATIONS
 
