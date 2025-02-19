@@ -12,11 +12,10 @@ Then I prepared the data for future exploratory analysis
 
 Insights / problems and solutions 
 
-1.## most frequently visited doctor
-## identifies which doctor handles the most patients
-## identify which doctors has the most and least patients visit
-  ## Problem if one doctor has significantly more visit than others , patient distribution is uneven
-  ## which can lead to long wait time
+1. most frequently visited doctor
+..Identifies which doctor handles the most patients
+ ..identify which doctors has the most and least patients visit
+ 
 select 
 d.doctor_id, d.name, count(visit_id) as total_visited
 from visits v
@@ -25,17 +24,19 @@ on d.doctor_id = v.doctor_id
 group by d.name , d.doctor_id
 order by total_visited desc;
 
-2.## determine peak visit day
- ## determine the busiest day of visits
- ## so we can optimise scheduling and improve  efficiency 
+2. Determine peak visit day
+Determine the busiest day of visits
+  ..so we can optimise scheduling and improve  efficiency
+   
  select 
  dayname(visit_date) as  Dates, count(*) as total_visit
   from visits
   group by dates
   order by total_visit desc;
 
-3## find the revenue by departments
- ## problem- which department generate the most revenue
+3 find the revenue by departments
+  problem- which department generate the most revenue
+  
    select
  d.department, round(sum(treatment_cost),2) as sum_billing
   from visits v
@@ -45,8 +46,9 @@ order by total_visited desc;
   order by  sum_billing desc
   limit 5;
 
-4## whats the age distribution of patients
-  ## what age groups visits the hospitals more
+4 whats the age distribution of patients
+   what age groups visits the hospitals more
+   
     select  
    case 
    when  age between 0 and 12 then '0-12 (chlidren)'
@@ -60,7 +62,7 @@ order by total_visited desc;
    group by age_group
    order by  total_patients desc;
 
-5 ## find patients who have not visited the doctor in over a year
+5  find patients who have not visited the doctor in over a year
    select  p.name, max(v.visit_date) as last_visit
    from visits v
    join patients p
@@ -68,13 +70,7 @@ order by total_visited desc;
    group by  p.name
    having datediff(curdate(), max(v.visit_date)) > 365;
 
-6.   ## does doctors experience affect patients visits
-   
-   ## more experience doctors may attracts patients due to reputations
-   ## and less experience doctors may have fewer patients  leading to under-utilizations
-   ##?? does more experience lead to more patients, the answer is yes, judging form our visualization
-
-7 ## which experience level is the most popular
+6  which experience level is the most popular
  select 
  case 
  when experience_years <5 then '0-4 years(new)'
